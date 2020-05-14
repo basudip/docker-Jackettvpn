@@ -1,7 +1,7 @@
 # Jackett and OpenVPN, JackettVPN
 
 FROM ubuntu:18.04
-MAINTAINER DyonR
+MAINTAINER LEON
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV XDG_DATA_HOME="/config" \
@@ -19,6 +19,9 @@ RUN apt update \
     && apt -y upgrade \
     && apt -y install \
     apt-transport-https \
+    nano \          #LEON:-> New Addition since fork
+    iproute2 \      #LEON:-> New Addition since fork
+    net-tools \     #LEON:-> New Addition since fork
     wget \
     curl \
     gnupg \
@@ -48,9 +51,9 @@ RUN apt update \
 
 # Install Jackett
 RUN jackett_latest=$(curl --silent "https://api.github.com/repos/Jackett/Jackett/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') \
-    && curl -o /opt/Jackett.Binaries.LinuxAMDx64.tar.gz -L https://github.com/Jackett/Jackett/releases/download/$jackett_latest/Jackett.Binaries.LinuxAMDx64.tar.gz \
-    && tar -xvzf /opt/Jackett.Binaries.LinuxAMDx64.tar.gz \
-    && rm /opt/Jackett.Binaries.LinuxAMDx64.tar.gz
+    && curl -o /opt/Jackett.Binaries.LinuxARM32.tar.gz -L https://github.com/Jackett/Jackett/releases/download/$jackett_latest/Jackett.Binaries.LinuxARM32.tar.gz \
+    && tar -xvzf /opt/Jackett.Binaries.LinuxARM32.tar.gz \
+    && rm /opt/Jackett.Binaries.LinuxARM32.tar.gz
 
 VOLUME /blackhole /config
 
