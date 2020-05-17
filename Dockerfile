@@ -1,6 +1,6 @@
 # Jackett and OpenVPN, JackettVPN
 
-FROM ubuntu:18.04
+FROM ubuntu
 MAINTAINER LEON
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -19,9 +19,9 @@ RUN apt update \
     && apt -y upgrade \
     && apt -y install \
     apt-transport-https \
-    nano \          #LEON:-> New Addition since fork
-    iproute2 \      #LEON:-> New Addition since fork
-    net-tools \     #LEON:-> New Addition since fork
+    nano \
+    iproute2 \
+    net-tools \
     wget \
     curl \
     gnupg \
