@@ -1,0 +1,17 @@
+version: "3.3"
+services:
+  openvpn-client:
+    image: dperson/openvpn-client
+    cap_add:
+      - net_admin
+    security_opt:
+      - label:disable
+    container_name: openvpn-client
+    hostname: openvpn-client
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - /dev/net:/dev/net:z
+      - /srv/dev-disk-by-label-RaspiBackup/Docker/open-vpn/:/vpn
+    restart: always
